@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: /bin/sh -c "rm -f ./tmp/pids/server.pid; bin/rails s"
+    volumes:
+      - .:/agri-smile
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+      - "443:443"
+    tty: true
+    stdin_open: true
+    environment:
+      - PORT=3000
+      - BINDING=0.0.0.0
+      - EDITOR=vi
+    depends_on:
+      - db
