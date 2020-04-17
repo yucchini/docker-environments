@@ -16,7 +16,7 @@ gem 'rails', '~>5’ （バージョン指定）
 5. プロジェクト構築
 
 ```
-$ docker-compose run web rails new . --force --no-deps --database=postgresql
+$ docker-compose run web rails _5.2.4_ new . --force --no-deps -d postgresql
 ```
 
 6. 新しいGemfileが取得されたのでもう一度イメージを作成するためにビルド
@@ -72,4 +72,9 @@ $ docker-compose up -build
 
 ```
 $ docker-compose run コンテナ名 bundle install
+```
+- コンテナ内に入ってbash操作
+
+```
+$ docker-compose run exec コンテナ名 bash
 ```
