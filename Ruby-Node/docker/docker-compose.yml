@@ -1,0 +1,43 @@
+version: '3'
+services:
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db_data:/var/lib/postgresql/data:delegated
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/Ruby/Dockerfile
+    tty: true
+    stdin_open: true
+    command: /bin/sh -c "rm -f ./tmp/pids/server.pid && bin/rails s -p 3000 -b 0.0.0.0"
+    volumes:
+      - .:/myapp:cached
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  webpack:
+    build:
+      context: .
+      dockerfile: ./docker/Node/Dockerfile
+    tty: true
+    stdin_open: true
+    command: npm run watch
+    volumes:
+      - .:/myapp:cached
+    ports:
+      - 3002:3002
+    depends_on:
+      - web
+
+volumes:
+  db_data:
+    driver: local
