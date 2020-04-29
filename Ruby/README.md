@@ -6,7 +6,7 @@
 
 ```Gemfile
 source 'https://rubygems.org'
-gem 'rails', '~>5’ （バージョン指定）
+gem 'rails', '~>5' （バージョン指定）
 ```
 
 3. 空のGemfile.lockを作成
