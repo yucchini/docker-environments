@@ -16,6 +16,7 @@ RUN apk upgrade --no-cache && \
       sudo \
       tzdata && \
     apk add --update --no-cache --virtual=build-dependencies \
+#       nodejs nodejs-npm \
       build-base \
       curl-dev \
       linux-headers \
